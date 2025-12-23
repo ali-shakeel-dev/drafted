@@ -1,0 +1,18 @@
+<%= form_with model: @resume do |f| %>
+  <div>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :template %><br>
+    <%= f.select :template, ["minimal", "modern"] %>
+  </div>
+
+  <div>
+    <%= f.check_box :active %>
+    <%= f.label :active %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
