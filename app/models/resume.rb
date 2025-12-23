@@ -6,4 +6,12 @@ class Resume < ApplicationRecord
   has_many :skills, -> {order(:position)}, dependent: :destroy
 
   validates :title, presence: true
+
+  before_save :capitalize_title
+
+  private 
+
+  def capitalize_title
+    self.title = title.split.map{|title| title.capitalize}.join(' ') if title.present?
+  end
 end

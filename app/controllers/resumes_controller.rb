@@ -3,7 +3,7 @@ class ResumesController < ApplicationController
   before_action :set_resume, only: %i[show edit update destroy]
 
   def index 
-    @resumes = current_user.resumes
+    @resumes = current_user.resumes.order(created_at: :desc)
   end
 
   def show
