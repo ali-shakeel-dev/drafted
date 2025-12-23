@@ -1,24 +1,32 @@
-# README
+# Drafted - A Resume Builder
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Drafted is a structured resume builder built with Ruby on Rails.
 
-Things you may want to cover:
+Users create resumes using structured data (experience, education, skills, projects)
+and generate clean, professional PDFs using predefined templates.
 
-* Ruby version
+This app focuses on functionality rather than
+design-heavy editors.
 
-* System dependencies
+## Features
 
-* Configuration
+- User authentication
+- Multiple resumes per user
+- Structured resume sections
+- Resume versioning
+- Template-based rendering
+- PDF export
 
-* Database creation
+## Tech Stack
 
-* Database initialization
+- Ruby on Rails
+- PostgreSQL
+- ERB
+- CSS
 
-* How to run the test suite
+## Setup
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+bundle install
+bin/rails db:create db:migrate
+bin/rails server
