@@ -10,9 +10,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_23_125112) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_23_164624) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "educations", force: :cascade do |t|
+    t.bigint "resume_id", null: false
+    t.string "institution"
+    t.string "degree"
+    t.date "start_date"
+    t.date "end_date"
+    t.text "description"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_educations_on_resume_id"
+  end
+
+  create_table "experiences", force: :cascade do |t|
+    t.bigint "resume_id", null: false
+    t.string "company"
+    t.string "role"
+    t.date "start_date"
+    t.date "end_date"
+    t.text "description"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_experiences_on_resume_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.bigint "resume_id", null: false
+    t.string "name"
+    t.text "description"
+    t.string "link"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_projects_on_resume_id"
+  end
+
+  create_table "resumes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.string "template"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_resumes_on_user_id"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.bigint "resume_id", null: false
+    t.string "name"
+    t.string "level"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_skills_on_resume_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,4 +82,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_23_125112) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "educations", "resumes"
+  add_foreign_key "experiences", "resumes"
+  add_foreign_key "projects", "resumes"
+  add_foreign_key "resumes", "users"
+  add_foreign_key "skills", "resumes"
 end
