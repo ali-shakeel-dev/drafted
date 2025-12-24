@@ -18,11 +18,13 @@ resume = user.resumes.find_or_create_by!(title: "Backend Engineer Resume") do |r
   r.active = true
 end
 
+resume.profiles.destroy_all
 resume.experiences.destroy_all
 resume.educations.destroy_all
 resume.projects.destroy_all
 resume.skills.destroy_all
 
+resume.profiles.create!()
 resume.experiences.create!(
   [
     {
