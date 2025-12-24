@@ -20,7 +20,7 @@ default: &default
   username: ali
   password: 'shah'
   host: localhost
-  port: 5433
+  port: 5432
 
 development:
   <<: *default

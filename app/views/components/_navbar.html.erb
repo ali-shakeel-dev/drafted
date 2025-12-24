@@ -12,12 +12,76 @@
       <a class="mr-5 hover:text-gray-900">Third Link</a>
       <a class="mr-5 hover:text-gray-900">Fourth Link</a>
     </nav>
-    <a href="<%=resumes_path%>">
-      <button class="rounded-md bg-gray-900 px-6 py-2 text-white flex items-center font-medium hover:bg-gray-800 cursor-pointer">Dashboard
-        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-          <path d="M5 12h14M12 5l7 7-7 7"></path>
-        </svg>
-      </button>
-    </a>
+
+    <% if user_signed_in? %>
+
+    <span class="flex gap-5">
+
+      <a href="<%=resumes_path%>">
+        <button class="rounded-md bg-gray-900 px-6 py-2 text-white flex items-center font-medium hover:bg-gray-800 cursor-pointer">Dashboard
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </a>
+
+      <div class="relative">
+        <!-- Avatar button -->
+        <button
+          type="button"
+          class="flex items-center focus:outline-none cursor-pointer"
+          onclick="document.getElementById('user-menu').classList.toggle('hidden')"
+        >
+          <img
+            class="h-9 w-9 rounded-full object-cover"
+            src="https://i.pravatar.cc/100?img=12"
+            alt="User avatar"
+          />
+        </button>
+
+        <!-- Dropdown -->
+        <div
+          id="user-menu"
+          class="hidden absolute right-0 mt-2 w-64 rounded-lg bg-white shadow-lg ring-1 ring-black/5 z-10"
+        >
+          <!-- User info -->
+          <div class="px-4 py-3 border-b border-gray-100">
+            <p class="text-sm font-medium text-gray-900">
+              User Name
+            </p>
+            <p class="text-sm text-gray-500 truncate">
+              <%=current_user.email%>
+            </p>
+          </div>
+
+          <!-- Actions -->
+          <div class="py-2">
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 cursor-pointer"%>
+          </div>
+        </div>
+      </div>
+
+    </span>
+    
+    <% else %>
+
+    <span class="flex gap-5">
+      <a href="<%=new_user_registration_path%>">
+        <button class="rounded-md bg-gray-900 px-6 py-2 text-white flex items-center font-medium hover:bg-gray-800 cursor-pointer">Sign Up
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </a>
+
+      <a href="<%=user_session_path%>">
+        <button class="rounded-md bg-gray-900 px-6 py-2 text-white flex items-center font-medium hover:bg-gray-800 cursor-pointer">Log In
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </a>
+    </span>
+    <% end %>
   </div>
 </header>
