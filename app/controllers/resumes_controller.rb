@@ -1,13 +1,14 @@
 class ResumesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_resume, only: %i[show edit update destroy]
+  before_action :set_resume, only: %i[show edit update destroy download]
 
   def index 
     @resumes = current_user.resumes.order(created_at: :desc)
   end
 
   def show
-
+    @resume = Resume.find(params[:id])
+    @profile = @resume.profile || @resume.build_profile
   end
 
   def new
@@ -40,7 +41,19 @@ class ResumesController < ApplicationController
     redirect_to resumes_path
   end
 
-  private 
+  def download
+    respond_to do |format|
+      format.pdf do
+        render pdf: @resume.title.parameterize, 
+              template: "resumes/pdf",
+              formats: [:html],
+              layout: "pdf",
+              disposition: "attachment"
+      end
+    end
+  end
+
+  private
 
   def set_resume
     @resume = current_user.resumes.find(params[:id])
