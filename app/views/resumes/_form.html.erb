@@ -47,12 +47,20 @@
           </div>
         </div>
 
-        <!-- Active -->
         <div class="p-2 w-full">
-          <label class="flex items-center gap-2 text-sm text-gray-600">
+          <label class="group flex items-center gap-3 cursor-pointer text-sm text-gray-700">
             <%= f.check_box :active,
-                class: "rounded border-gray-300 text-gray-900 focus:ring-gray-900" %>
-            Set as active resume
+              class: "
+                h-5 w-5
+                rounded-md
+                border border-gray-300
+                text-gray-900
+                cursor-pointer
+              " %>
+
+            <span class="group-hover:text-gray-900">
+              Set as active resume
+            </span>
           </label>
         </div>
 

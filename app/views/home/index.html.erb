@@ -1,66 +1,73 @@
-<%= render "/components/navbar" %>
+  <%= render "/components/navbar" %>
 
-<div class="min-h-screen bg-gray-50 container mx-auto">
-<!-- Hero -->
-<section class="mx-auto px-6 py-10 h-[90vh] flex">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-    <!-- Left: Text -->
-    <div>
-      <p class="mt-6 text-lg text-gray-600">ONLINE RESUME BUILDER</p>
+  <section class="container mx-auto px-6 py-16 lg:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
+      
+      <!-- Left: Text -->
+      <div class="text-center lg:text-left">
+        <p class="text-xl font-medium tracking-wide text-gray-500 uppercase">
+          Online Resume Builder
+        </p>
 
-      <h1 class="text-8xl font-bold tracking-tight text-gray-900">
-        Build clean, structured resumes.
-      </h1>
+        <h1 class="mt-4 text-4xl sm:text-5xl lg:text-6xl xl:text-8xl font-bold tracking-tight text-gray-900">
+          Build clean, structured resumes.
+        </h1>
 
-      <p class="mt-6 text-lg text-gray-600">
-        Drafted helps you create structured resumes, manage multiple versions,
-        and export professional PDFs without fighting formatting.
-      </p>
+        <p class="mt-6 text-base sm:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0">
+          Drafted helps you create structured resumes, manage multiple versions,
+          and export professional PDFs without fighting formatting.
+        </p>
 
-      <div class="mt-8 flex gap-4">
-        <%= link_to "Create your resume",
-            resumes_path,
-            class: "rounded-md bg-gray-900 px-6 py-3 text-white font-medium hover:bg-gray-800" %>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <%= link_to "Create your resume",
+              resumes_path,
+              class: "inline-flex justify-center rounded-md bg-gray-900 px-6 py-3 text-white font-medium hover:bg-gray-800" %>
 
-        <a href="#features"
-           class="rounded-md border border-gray-300 px-6 py-3 text-gray-700 font-medium hover:bg-gray-100">
-          Learn more
-        </a>
+          <a href="#features"
+            class="inline-flex justify-center rounded-md border border-gray-300 px-6 py-3 text-gray-700 font-medium hover:bg-gray-100">
+            Learn more
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Image -->
+      <div class="relative flex justify-center">
+        <%= image_tag(
+          "https://resumesector.com/wp-content/uploads/2024/10/Best-Resume-Template-Free-Download-MS-Word-.jpg",
+          alt: "Drafted resume preview",
+          class: "w-full max-w-sm sm:max-w-md lg:max-w-lg rounded-lg border shadow-sm"
+        ) %>
       </div>
     </div>
+  </section>
 
-    <!-- Right: Image -->
-    <div class="relative flex justify-center">
-      <%= image_tag "https://resumesector.com/wp-content/uploads/2024/10/Best-Resume-Template-Free-Download-MS-Word-.jpg",
-          alt: "Drafted resume preview",
-          class: "w-100 rounded-lg border shadow-sm" %>
-    </div>
-  </div>
-</section>
-
-
-  <!-- Features -->
   <section id="features" class="border-t border-gray-300">
-    <div class="container mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-3 gap-12">
+  <div class="container mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
     
       <div>
-        <h3 class="text-lg font-semibold text-gray-900">Structured data</h3>
-        <p class="mt-2 text-gray-600">
+        <h3 class="text-base font-semibold text-gray-900">
+          Structured data
+        </h3>
+        <p class="mt-2 text-sm text-gray-600">
           Experiences, education, skills, and projects are stored as structured data —
           not messy text blocks.
         </p>
       </div>
 
       <div>
-        <h3 class="text-lg font-semibold text-gray-900">Multiple versions</h3>
-        <p class="mt-2 text-gray-600">
+        <h3 class="text-base font-semibold text-gray-900">
+          Multiple versions
+        </h3>
+        <p class="mt-2 text-sm text-gray-600">
           Create different resume versions for different roles without duplicating work.
         </p>
       </div>
 
       <div>
-        <h3 class="text-lg font-semibold text-gray-900">PDF export</h3>
-        <p class="mt-2 text-gray-600">
+        <h3 class="text-base font-semibold text-gray-900">
+          PDF export
+        </h3>
+        <p class="mt-2 text-sm text-gray-600">
           Generate clean, professional PDFs using predefined templates.
         </p>
       </div>
@@ -69,5 +76,7 @@
 
   <!-- Footer -->
   <footer class="border-t border-gray-300">
-    <div class="container mx-auto px-6 py-6 text-sm text-gray-500">
-      © <%= Time.current.year %> Drafted - Resume Builder
+    <div class="container mx-auto px-6 py-6 text-xs sm:text-sm text-gray-500 text-center">
+      © <%= Time.current.year %> Drafted — Resume Builder
+    </div>
+  </footer>
