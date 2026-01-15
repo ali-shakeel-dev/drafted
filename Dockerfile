@@ -50,7 +50,7 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # ⛔ REMOVE asset precompile unless you 100% need it
-# RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
+RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
 # --------------------
 # Final stage
