@@ -65,6 +65,7 @@ COPY --from=build /rails /rails
 RUN groupadd --system rails && \
     useradd rails --system --create-home --shell /bin/bash -g rails && \
     chown -R rails:rails /rails
+    chmod +x /rails/bin/docker-entrypoint
 
 USER rails
 
