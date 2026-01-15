@@ -61,10 +61,10 @@ FROM base
 COPY --from=build ${BUNDLE_PATH} ${BUNDLE_PATH}
 COPY --from=build /rails /rails
 
-# Create non-root user
+# Create non-root user and set permissions
 RUN groupadd --system rails && \
     useradd rails --system --create-home --shell /bin/bash -g rails && \
-    chown -R rails:rails /rails
+    chown -R rails:rails /rails && \
     chmod +x /rails/bin/docker-entrypoint
 
 USER rails
