@@ -102,4 +102,15 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+
+  # Enable SSL (around line 26-29)
+  config.assume_ssl = true
+  config.force_ssl = true
+
+  # Replace Solid Cache with memory store (around line 47)
+  config.cache_store = :memory_store
+
+  # Replace Solid Queue with async adapter (around line 50-51)
+  config.active_job.queue_adapter = :async
 end
