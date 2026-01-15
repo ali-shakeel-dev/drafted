@@ -9,6 +9,13 @@ class ResumesController < ApplicationController
   def show
     @resume = Resume.find(params[:id])
     @profile = @resume.profile || @resume.build_profile
+    @experience = 
+    if params[:edit_experience_id]
+      @resume.experiences.find(params[:edit_experience_id])
+    else
+      @resume.experiences.build
+    end
+
   end
 
   def new

@@ -1,3 +1,51 @@
-<%= render "components/navbar" %>
-Resume Templates
-<%= render "components/footer" %>
+<%= render "components/navbar"%>
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-10 mx-auto">
+    <h2 class="font-bold text-4xl text-gray-900 pb-2">Resume Templates</h2>
+    <p class="text-lg text-gray-600 pb-6">
+      Choose a design you like. You can customize or switch it later.
+    </p>
+
+    <div class="flex flex-wrap -m-4">
+
+      <!-- Resume Card 1 -->
+      <div class="xl:w-1/4 md:w-1/2 p-4">
+        <a href="<%= new_resume_path %>">
+          <div class="bg-gray-100 p-6 rounded-lg border border-gray-100 hover:border-gray-400 hover:shadow-sm">
+            <img
+              src="https://resumesector.com/wp-content/uploads/2024/10/Best-Resume-Template-Free-Download-MS-Word-.jpg"
+              alt="Minimal template"
+              class="h-full rounded w-full object-cover object-center mb-6"
+            />
+            <h3 class="tracking-widest text-green-500 text-xs font-medium title-font">
+              TEMPLATE
+            </h3>
+            <h2 class="text-lg text-gray-900 font-medium title-font">
+              Minimal
+            </h2>
+          </div>
+        </a>
+      </div>
+
+      <!-- Resume Card 2 -->
+      <div class="xl:w-1/4 md:w-1/2 p-4">
+        <a href="<%= new_resume_path %>">
+          <div class="bg-gray-100 p-6 rounded-lg border border-gray-100 hover:border-gray-400 hover:shadow-sm">
+            <img
+              src="https://marketplace.canva.com/EAGQ-IIGNa0/1/0/1131w/canva-modern-professional-cv-resume-RZAonb9ZjgE.jpg"
+              alt="Modern template"
+              class="h-full rounded w-full object-cover object-center mb-6"
+            />
+            <h3 class="tracking-widest text-green-500 text-xs font-medium title-font">
+              TEMPLATE
+            </h3>
+            <h2 class="text-lg text-gray-900 font-medium title-font">
+              Modern
+            </h2>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>

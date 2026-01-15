@@ -12,7 +12,15 @@ class ExperiencesController < ApplicationController
 
   def update
     @experience = @resume.experiences.find(params[:id])
-    @experience.update(experience_params)
+    if @experience.update(experiences_params)
+      redirect_to resume_path(@resume)
+    end    
+  end
+
+  def destroy
+    @resume = current_user.resumes.find(params[:resume_id])
+
+    @experience = @resume.experiences.find(params[:id]).destroy
     redirect_to @resume
   end
 
