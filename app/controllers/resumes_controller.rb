@@ -13,7 +13,7 @@ class ResumesController < ApplicationController
     if params[:edit_experience_id]
       @resume.experiences.find(params[:edit_experience_id])
     else
-      @resume.experiences.build
+      Experience.new(resume: @resume)
     end
 
   end

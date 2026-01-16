@@ -4,7 +4,8 @@
     <title><%= content_for(:title) || "Drafted - Online Resume Builder" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <%= wicked_pdf_stylesheet_link_tag "application", media: "all" rescue stylesheet_link_tag "application", media: "all" %>    <%= csrf_meta_tags %>
+    <%= wicked_pdf_stylesheet_link_tag "application", media: "all" rescue stylesheet_link_tag "application", media: "all" %>
+    <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= yield :head %>

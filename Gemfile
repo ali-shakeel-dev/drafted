@@ -6,6 +6,7 @@ gem "rails", "~> 7.2.3"
 gem "sprockets-rails"
 # Use postgresql as the database for Active Record
 gem "wicked_pdf"
+gem 'wkhtmltopdf-binary'
 gem "pg", "~> 1.1"
 # User authentication with Devise
 gem "devise"
