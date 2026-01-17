@@ -6,8 +6,13 @@ class SkillsController < ApplicationController
   end
 
   def destroy
-    @resume.skills.find(params[:id]).destroy
-    redirect_to @resume
+    skill = current_user.resumes.find(params[:resume_id]).skills.find(params[:id])
+
+    if skill.destroy
+      redirect_to @resume
+    else
+      redirect_to resumes_path
+    end
   end
 
   private
