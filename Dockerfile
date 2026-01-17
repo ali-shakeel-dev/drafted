@@ -29,11 +29,13 @@ FROM base AS build
 # Build deps
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
-    build-essential \
-    git \
-    libpq-dev \
-    libyaml-dev \
-    pkg-config \
+    curl \
+    libjemalloc2 \
+    libvips \
+    postgresql-client \
+    wkhtmltopdf \
+    fonts-liberation \
+    fonts-dejavu \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install gems
