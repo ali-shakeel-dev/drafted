@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  get "home/index"
   devise_for :users
 
   resources :resumes do 
     resource :profile
     resources :skills
     resources :experiences
+    resources :educations
     member do
       get :download
     end
