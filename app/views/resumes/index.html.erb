@@ -14,20 +14,61 @@
         </a>
       </div>
 
-      <% @resumes.each do |resume| %>
-        <div class="xl:w-1/4 md:w-1/2 p-4">
-        <a href="/resumes/<%=resume.id%>">
-          <div class="bg-gray-100 p-6 rounded-lg border border-gray-100 hover:border-gray-400 hover:shadow-sm">
-          <% image_file = resume.template == "minimal" ? "https://resumesector.com/wp-content/uploads/2024/10/Best-Resume-Template-Free-Download-MS-Word-.jpg" : "https://marketplace.canva.com/EAGQ-IIGNa0/1/0/1131w/canva-modern-professional-cv-resume-RZAonb9ZjgE.jpg" %>
-          <%= image_tag image_file, class: "h-full rounded w-full object-cover object-center mb-6", alt: "#{resume.template} template" %>
-          <h3 class="tracking-widest text-green-500 text-xs font-medium title-font"><%=resume.template.upcase%></h3>
-            <h2 class="text-lg text-gray-900 font-medium title-font"><%=resume.title%></h2>
-            <p class="leading-relaxed text-base">Created: <%=resume.created_at.in_time_zone("Islamabad").strftime("%d %b %Y, %I:%M %p")%></p>
+      <% if @resumes.any? %>
+        <% @resumes.each do |resume| %>
+          <div class="xl:w-1/4 md:w-1/2 p-4">
+            <a href="/resumes/<%=resume.id%>">
+              <div class="bg-gray-100 p-6 rounded-lg border border-gray-100 hover:border-gray-400 hover:shadow-sm">
+              <% image_file = resume.template == "minimal" ? "https://resumesector.com/wp-content/uploads/2024/10/Best-Resume-Template-Free-Download-MS-Word-.jpg" : "https://marketplace.canva.com/EAGQ-IIGNa0/1/0/1131w/canva-modern-professional-cv-resume-RZAonb9ZjgE.jpg" %>
+              <%= image_tag image_file, class: "h-full rounded w-full object-cover object-center mb-6", alt: "#{resume.template} template" %>
+              <div class="flex gap-2 items-center justify-between">
+                <span>
+                <h3 class="tracking-widest text-green-500 text-xs font-medium title-font"><%=resume.template.upcase%></h3>
+                  <h2 class="text-lg text-gray-900 font-medium title-font"><%=resume.title%></h2>
+                  <p class="leading-relaxed text-base">Created: <%=resume.created_at.in_time_zone("Islamabad").strftime("%d %b %Y, %I:%M %p")%></p>
+                </span>
+            </a>
+                
+                <span>
+                  <div class="relative inline-block text-left">
+                    <!-- More button -->
+                    <button onclick="toggleDropdown()" class="flex items-center justify-center rounded-md p-2 hover:bg-gray-200 focus:outline-none cursor-pointer">
+                      <!-- Vertical 3 dots SVG -->
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-600"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <circle cx="10" cy="4" r="1.5" />
+                        <circle cx="10" cy="10" r="1.5" />
+                        <circle cx="10" cy="16" r="1.5" />
+                      </svg>
+                    </button>
+
+                    <!-- Dropdown -->
+                    <div id="dropdown" class="absolute right-0 z-10 mt-2 hidden w-32 rounded-md border border-gray-200 bg-white shadow-lg">
+                      <%= link_to "Edit Resume", edit_resume_path(resume), class: "flex w-full items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"%>
+                      <%= link_to "Delete Resume", resume_path(resume), data: {turbo_method: :delete}, class: "flex w-full items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50"%>
+                    </div>
+                  </div>
+                </span>
+              </div>
+              </div>
+              
+              
+              
+              
           </div>
-          </a>
-        </div>
+        <% end %>
       <% end %>
 
     </div>
   </div>
 </section>
+
+<script>
+  function toggleDropdown() {
+    document.getElementById("dropdown").classList.toggle("hidden")
+  }
+</script>

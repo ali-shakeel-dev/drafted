@@ -50,7 +50,7 @@ class ResumesController < ApplicationController
 
   def update 
     if @resume.update(resumes_params)
-      redirect_to @resume
+      redirect_to resumes_path
     else
       render :edit
     end
