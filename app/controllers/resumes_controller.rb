@@ -18,9 +18,16 @@ class ResumesController < ApplicationController
 
     @education = 
     if params[:edit_education_id]
-      @resume.educations.find(params[:id])
+      @resume.educations.find(params[:edit_education_id])
     else
       Education.new(resume: @resume)
+    end
+
+    @project = 
+    if params[:edit_project_id]
+      @resume.projects.find(params[:edit_project_id])
+    else
+      Project.new(resume: @resume)
     end
   end
 
