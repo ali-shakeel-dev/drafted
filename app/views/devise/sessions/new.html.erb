@@ -7,16 +7,43 @@
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="relative mb-4">
         <%= f.label :email, class: "leading-7 text-sm text-gray-600" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full bg-white rounded border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-gray-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full bg-white rounded border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-gray-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out", placeholder: "Email" %>
       </div>
       <div class="relative mb-4">
-          <%= f.label :password, class: "leading-7 text-sm text-gray-600" %>
-          <%= f.password_field :password, autocomplete: "current-password", class: "w-full bg-white rounded border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-gray-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
+        <%= f.label :password, class: "leading-7 text-sm text-gray-600" %>
+
+        <%= f.password_field :password,
+            autocomplete: "current-password",
+            id: "login_password_field",
+            placeholder: "Password",
+            class: "w-full bg-white rounded border border-gray-300 focus:border-gray-900 focus:ring-2 focus:ring-gray-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" %>
+
+        <!-- Eye icon -->
+        <button
+          type="button"
+          class="absolute right-3 top-[38px] text-gray-500 hover:text-gray-700 cursor-pointer"
+          id="eye_icon"
+          onclick="togglePassword()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </button>
       </div>
       <% if devise_mapping.rememberable? %>
       <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <%= f.check_box :remember_me, class: "cursor-pointer" %>
+        <%= f.label :remember_me, class: "cursor-pointer" %>
       </div>
       <% end %>      
       <%= f.submit "Log in", class: "cursor-pointer text-white bg-gray-900 border-0 py-1 px-6 my-4 focus:outline-none hover:bg-gray-700 rounded text-lg" %>
@@ -24,3 +51,11 @@
     <%= render "devise/shared/links" %>
   </div>
 </div>
+<% content_for :login_js do %>
+  <script>
+    function togglePassword(){
+      let password_field = document.getElementById("login_password_field");
+      password_field.type = password_field.type === "password" ? "text" : "password";
+    }
+  </script>
+<% end %>
