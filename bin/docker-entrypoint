@@ -6,5 +6,11 @@ rm -f /rails/tmp/pids/server.pid
 # Run database migrations
 bundle exec rails db:prepare
 
+# Seed on first deploy only
+if [ ! -f /rails/tmp/seeded ]; then
+  bundle exec rails db:seed
+  touch /rails/tmp/seeded
+fi
+
 # Execute the container's main process
 exec "$@"
