@@ -1,87 +1,126 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+puts "Seeding database..."
 
-user = User.find_or_create_by!(email: "muhammadalykhan77@gmail.com") do |u|
-  u.password = "ASHAH@77"
-  u.password_confirmation = "ASHAH@77"
+Skill.delete_all
+Project.delete_all
+Experience.delete_all
+Education.delete_all
+Profile.delete_all
+Resume.delete_all
+User.delete_all
+
+user = User.create!(
+  email: "ali@gmail.com",
+  password: "123123",
+  password_confirmation: "123123"
+)
+
+resume = Resume.create!(
+  user: user,
+  title: "Senior Software Engineer Resume",
+  template: "classic",
+  active: true
+)
+
+Profile.create!(
+  resume: resume,
+  name: "Ali Khan",
+  profession: "Full Stack Software Engineer",
+  email: "ali@gmail.com",
+  phone: "+92 300 1234567",
+  location: "Lahore, Pakistan",
+  website: "https://github.com/ali",
+  description: <<~TEXT
+    I am a full stack software engineer with hands-on experience building scalable web applications using Ruby on Rails, PostgreSQL, and modern frontend technologies. Over the past several years, I have worked on real-world products that required strong problem-solving skills, clean architecture, and attention to performance and maintainability.
+
+    My core expertise lies in backend development with Rails, where I have designed RESTful APIs, implemented authentication and authorization systems, and optimized database queries for high-traffic use cases. 
+  TEXT
+)
+
+# ======================
+# Experiences (3)
+# ======================
+Experience.create!(
+  resume: resume,
+  company: "TechSoft Solutions",
+  role: "Junior Software Engineer",
+  start_date: Date.new(2021, 1, 1),
+  end_date: Date.new(2022, 6, 30),
+  description: "Worked on backend features using Ruby on Rails, implemented REST APIs, and fixed production bugs. Collaborated closely with senior engineers.",
+  position: 1
+)
+
+Experience.create!(
+  resume: resume,
+  company: "Innovate Labs",
+  role: "Software Engineer",
+  start_date: Date.new(2022, 7, 1),
+  end_date: Date.new(2023, 12, 31),
+  description: "Built scalable Rails applications, optimized PostgreSQL queries, and integrated third-party services. Took ownership of multiple features from design to deployment.",
+  position: 2
+)
+
+Experience.create!(
+  resume: resume,
+  company: "Remote Startup",
+  role: "Full Stack Developer",
+  start_date: Date.new(2024, 1, 1),
+  end_date: nil,
+  description: "Leading full stack development using Rails and React. Responsible for architecture decisions, code reviews, and improving application performance.",
+  position: 3
+)
+
+# ======================
+# Education
+# ======================
+Education.create!(
+  resume: resume,
+  institution: "Punjab University",
+  degree: "BS Computer Science",
+  start_date: Date.new(2017, 9, 1),
+  end_date: Date.new(2021, 6, 30),
+  description: "Studied computer science fundamentals including data structures, databases, and software engineering.",
+  position: 1
+)
+
+# ======================
+# Achievements (stored as Projects)
+# ======================
+Project.create!(
+  resume: resume,
+  name: "Achievement: Performance Optimization Award",
+  description: "Recognized for improving application response time by over 40 percent through query optimization and caching strategies.",
+  link: nil,
+  position: 1
+)
+
+Project.create!(
+  resume: resume,
+  name: "Achievement: Product Launch Lead",
+  description: "Led the successful launch of a production Rails application used by thousands of users with zero critical issues at launch.",
+  link: nil,
+  position: 2
+)
+
+# ======================
+# Skills (9)
+# ======================
+[
+  ["Ruby on Rails", "Advanced"],
+  ["PostgreSQL", "Advanced"],
+  ["JavaScript", "Intermediate"],
+  ["React", "Intermediate"],
+  ["HTML", "Advanced"],
+  ["CSS", "Advanced"],
+  ["Git", "Advanced"],
+  ["REST APIs", "Advanced"],
+  ["System Design", "Intermediate"]
+].each_with_index do |(name, level), index|
+  Skill.create!(
+    resume: resume,
+    name: name,
+    level: level,
+    position: index + 1
+  )
 end
 
-resume = user.resumes.find_or_create_by!(title: "Backend Engineer Resume") do |r|
-  r.template = "minimal"
-  r.active = true
-end
-
-resume.profiles.destroy_all
-resume.experiences.destroy_all
-resume.educations.destroy_all
-resume.projects.destroy_all
-resume.skills.destroy_all
-
-resume.profiles.create!()
-resume.experiences.create!(
-  [
-    {
-      company: "Acme Corp",
-      role: "Backend Engineer",
-      start_date: Date.new(2022, 1, 1),
-      end_date: nil,
-      description: "Built and maintained REST APIs using Ruby on Rails. Improved response times by optimizing database queries.",
-      position: 1
-    },
-    {
-      company: "Beta Labs",
-      role: "Junior Software Engineer",
-      start_date: Date.new(2020, 6, 1),
-      end_date: Date.new(2021, 12, 31),
-      description: "Worked on internal tools and dashboards. Collaborated with product managers to ship features quickly.",
-      position: 2
-    }
-  ]
-)
-
-resume.educations.create!(
-  [
-    {
-      institution: "State University",
-      degree: "B.Sc. in Computer Science",
-      start_date: Date.new(2016, 9, 1),
-      end_date: Date.new(2020, 6, 1),
-      description: "Focused on software engineering, databases, and distributed systems.",
-      position: 1
-    }
-  ]
-)
-
-resume.projects.create!(
-  [
-    {
-      name: "Drafted",
-      description: "A structured resume builder that generates clean, professional PDFs using Ruby on Rails.",
-      link: "https://github.com/yourusername/drafted",
-      position: 1
-    },
-    {
-      name: "Feature Flag Tool",
-      description: "Internal tool to manage feature rollouts and kill switches in production.",
-      link: "",
-      position: 2
-    }
-  ]
-)
-
-resume.skills.create!(
-  [
-    { name: "Ruby on Rails", level: "advanced", position: 1 },
-    { name: "PostgreSQL", level: "advanced", position: 2 },
-    { name: "REST APIs", level: "advanced", position: 3 },
-    { name: "Git", level: "advanced", position: 4 },
-    { name: "Docker", level: "intermediate", position: 5 }
-  ]
-)
+puts "✅ Seeding complete!"
