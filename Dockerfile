@@ -1,33 +1,19 @@
 # syntax = docker/dockerfile:1
-
 ARG RUBY_VERSION=3.3.5
 FROM ruby:${RUBY_VERSION}-slim AS base
 
 # Rails app lives here
 WORKDIR /rails
 
-# Install runtime packages
+# Install runtime packages INCLUDING wkhtmltopdf
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
     curl \
     libjemalloc2 \
     libvips \
     postgresql-client \
-    xfonts-75dpi \
-    xfonts-base \
-    libjpeg62-turbo \
-    libx11-6 \
-    libxcb1 \
-    libxext6 \
-    libxrender1 \
-    wget \
-    ca-certificates \
+    wkhtmltopdf \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-# Install wkhtmltopdf
-RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_amd64.deb \
-    && dpkg -i wkhtmltox_0.12.6-1.bionic_amd64.deb || apt-get install -f -y \
-    && rm wkhtmltox_0.12.6-1.bionic_amd64.deb
 
 # Production env
 ENV RAILS_ENV=production \
@@ -64,7 +50,7 @@ COPY . .
 # Precompile bootsnap (safe)
 RUN bundle exec bootsnap precompile app/ lib/
 
-# ⛔ REMOVE asset precompile unless you 100% need it
+# Precompile assets
 RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
 # --------------------
@@ -81,9 +67,6 @@ RUN groupadd --system rails && \
     useradd rails --system --create-home --shell /bin/bash -g rails && \
     chown -R rails:rails /rails && \
     chmod +x /rails/bin/docker-entrypoint
-
-# Set PATH for wkhtmltopdf if needed
-ENV PATH="/usr/local/bin:$PATH"
 
 USER rails
 
