@@ -8,6 +8,9 @@ and generate clean, professional PDFs using predefined templates.
 This app focuses on functionality rather than
 design-heavy editors.
 
+![Project 1](https://github.com/ali-shakeel-dev/drafted/blob/main/public/Drafted_Preview.PNG)
+![Project 2](https://github.com/ali-shakeel-dev/drafted/blob/main/public/Drafted_Resume_Preview.PNG)
+
 ## Features
 
 - User authentication
