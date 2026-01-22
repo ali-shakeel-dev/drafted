@@ -1,58 +1,61 @@
-<div class="max-w-3xl min-w-3xl w-2/3 max-h-fit mx-auto bg-white px-8 py-10 border border-gray-300 rounded shadow-sm">
+<div id="resume_container">
 
   <% if (profile = @resume.profile) %>
-    <header class="mb-8">
-      <span>
-        <h1 class="text-3xl font-bold text-gray-900"><%= @resume.profile.name %> <span class="text-gray-700 text-sm"></h1>
-        <%= @resume.profile.profession %></span>
-      </span>
-      <span>
-      <%if profile.location.present?%>
-        <p class="mt-1 text-gray-700 text-sm"><%= profile.location %></p>
-      <% end %>
-      <%if profile.email.present?%>
-        <p class="mt-1 text-gray-700 text-sm"><%= profile.email %></p>
-      <% end %>
-      <%if profile.phone.present?%>
-        <p class="mt-1 text-gray-700 text-sm"><%= profile.phone %></p>
-      <% end %>
-      <%if profile.website.present?%>
-        <p class="mt-1 text-gray-700 text-sm"><%= profile.website %></p>
-      <% end %>
-      </span>
+    <header id="resume_header">
+
+      <div id="header_left">
+        <h1 class="profile_name"><%= profile.name %></h1>
+        <p class="profile_profession"><%= profile.profession %></p>
+      </div>
+
+      <div id="header_right">
+
+        <% if profile.location.present? %>
+          <p class="profile_meta">
+            <%= profile.location %>
+          </p>
+        <% end %>
+
+        <% if profile.email.present? %>
+          <p class="profile_meta">
+            <%= profile.email %>
+          </p>
+        <% end %>
+
+        <% if profile.phone.present? %>
+          <p class="profile_meta">
+            <%= profile.phone %>
+          </p>
+        <% end %>
+
+        <% if profile.website.present? %>
+          <p class="profile_meta">
+            <%= profile.website %>
+          </p>
+        <% end %>
+
+      </div>
+
     </header>
   <% end %>
+  
   <!-- Profile -->
   <% if @resume.profile.present? %>
-    <section class="mb-8">
-      <h2 class="text-lg font-semibold text-gray-900 border-b pb-1 mb-4">
-        Profile
-      </h2>
-
-        <div class="mb-4">
-          <div class="flex justify-between">
-            <span class="text-gray-700 text-sm">
-              <%= @resume.profile.description %>
-            </span>
-          </div>
-        </div>
+    <section id="profile_section">
+      <h2 class="section_title">Profile</h2>
+      <p class="section_text"><%= @resume.profile.description %></p>
     </section>
   <% end %>
 
   <!-- Experience -->
   <% if @resume.experiences.any? %>
-    <section class="mb-8">
-      <h2 class="text-lg font-semibold text-gray-900 border-b pb-1 mb-4">
-        Experience
-      </h2>
-
+    <section id="experience_section">
+      <h2 class="section_title">Experience</h2>
       <% @resume.experiences.each do |exp| %>
-        <div class="mb-4">
-          <div class="flex justify-between">
-            <span class="font-medium text-gray-900">
-              <%= exp.role %> — <%= exp.company %>
-            </span>
-            <span class="text-sm text-gray-500">
+        <div class="experience_item">
+          <div class="experience_header">
+            <span class="experience_role"><%= exp.role %> — <%= exp.company %></span>
+            <span class="experience_dates">
               <%= exp.start_date.year %>
               <% if exp.end_date %>
                 – <%= exp.end_date.year %>
@@ -61,10 +64,7 @@
               <% end %>
             </span>
           </div>
-
-          <p class="mt-1 text-gray-700 text-sm">
-            <%= exp.description %>
-          </p>
+          <p class="experience_description"><%= exp.description %></p>
         </div>
       <% end %>
     </section>
@@ -72,19 +72,12 @@
 
   <!-- Education -->
   <% if @resume.educations.any? %>
-    <section class="mb-8">
-      <h2 class="text-lg font-semibold text-gray-900 border-b pb-1 mb-4">
-        Education
-      </h2>
-
+    <section id="education_section">
+      <h2 class="section_title">Education</h2>
       <% @resume.educations.each do |edu| %>
-        <div class="mb-3">
-          <div class="font-medium text-gray-900">
-            <%= edu.degree %>, <%= edu.institution %>
-          </div>
-          <div class="text-sm text-gray-500">
-            <%= edu.start_date.year %> – <%= edu.end_date&.year %>
-          </div>
+        <div class="education_item">
+          <p class="education_degree"><%= edu.degree %>, <%= edu.institution %></p>
+          <p class="education_dates"><%= edu.start_date.year %> – <%= edu.end_date&.year %></p>
         </div>
       <% end %>
     </section>
@@ -92,19 +85,12 @@
 
   <!-- Projects -->
   <% if @resume.projects.any? %>
-    <section class="mb-8">
-      <h2 class="text-lg font-semibold text-gray-900 border-b pb-1 mb-4">
-        Projects
-      </h2>
-
+    <section id="projects_section">
+      <h2 class="section_title">Projects</h2>
       <% @resume.projects.each do |project| %>
-        <div class="mb-3">
-          <div class="font-medium text-gray-900">
-            <%= project.name %>
-          </div>
-          <p class="text-sm text-gray-700">
-            <%= project.description %>
-          </p>
+        <div class="project_item">
+          <p class="project_name"><%= project.name %></p>
+          <p class="project_description"><%= project.description %></p>
         </div>
       <% end %>
     </section>
@@ -112,18 +98,14 @@
 
   <!-- Skills -->
   <% if @resume.skills.any? %>
-    <section>
-      <h2 class="text-lg font-semibold text-gray-900 border-b pb-1 mb-4">
-        Skills
-      </h2>
-
-      <ul class="flex flex-wrap gap-2">
+    <section id="skills_section">
+      <h2 class="section_title">Skills</h2>
+      <ul class="skills_list">
         <% @resume.skills.each do |skill| %>
-          <li class="text-sm bg-gray-100 px-3 py-1 rounded">
-            <%= skill.name %>
-          </li>
+          <li class="skill_item"><%= skill.name %></li>
         <% end %>
       </ul>
     </section>
   <% end %>
+  
 </div>

@@ -1,0 +1,125 @@
+#resume_container {
+  margin: 0 auto;
+  padding: 40px;
+  background: #ffffff;
+}
+
+#resume_header {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile_meta {
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.profile_meta .icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+}
+
+.profile_name {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.profile_profession {
+  font-size: 14px;
+  color: #4b5563;
+  margin-top: 4px;
+}
+
+.profile_meta {
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 4px;
+}
+
+.resume_section {
+  margin-bottom: 32px;
+}
+
+.section_title {
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid #d1d5db;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+}
+
+.section_text {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.experience_item {
+  margin-bottom: 16px;
+}
+
+.experience_header {
+  margin-bottom: 4px;
+}
+
+.experience_role {
+  font-weight: 600;
+}
+
+.experience_dates {
+  float: right;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.experience_description {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.education_item {
+  margin-bottom: 12px;
+}
+
+.education_degree {
+  font-weight: 600;
+}
+
+.education_dates {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.project_item {
+  margin-bottom: 12px;
+}
+
+.project_name {
+  font-weight: 600;
+}
+
+.project_description {
+  font-size: 14px;
+  color: #374151;
+}
+
+.skills_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill_item {
+  display: inline-block;
+  background: #f3f4f6;
+  padding: 6px 12px;
+  margin: 4px 6px 4px 0;
+  border-radius: 4px;
+  font-size: 13px;
+}
